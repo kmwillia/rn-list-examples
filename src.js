@@ -9,7 +9,7 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      list: 'flat',
+      list: 'virtual',
     };
   }
 

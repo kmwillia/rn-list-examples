@@ -18,9 +18,7 @@ export default class SectionListExample extends Component {
 
   _renderSectionHeader({ section }) {
     return (
-      <View style={styles.sectionHeader}>
-        <Text>{section.key}</Text>
-      </View>
+      <SectionHeader label={section.key} style={styles.sectionHeader} />
     );
   }
 
@@ -32,6 +30,16 @@ export default class SectionListExample extends Component {
         renderItem={this._renderItem}
         renderSectionHeader={this._renderSectionHeader}
       />
+    );
+  }
+}
+
+class SectionHeader extends Component {
+  render() {
+    return (
+      <View style={this.props.style}>
+        <Text>{this.props.label}</Text>
+      </View>
     );
   }
 }

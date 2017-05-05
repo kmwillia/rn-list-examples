@@ -5,25 +5,42 @@ import { immutableSectionsData } from './data';
 import styles from './styles';
 
 export default class VirtualizedListExample extends Component {
+  constructor() {
+    super();
+    let flatIndexCount = 0;
+    this.sectionIndices = [];
+    this.flatItems = immutableSectionsData.reduce((acc, value, index) => {
+      this.sectionIndices.push(flatIndexCount);
+      acc = acc.push(value);
+      flatIndexCount += value.get('data').size + 1;
+      return acc.concat(value.get('data'));
+    }, Immutable.List([]));
+  }
+
   _getItem(data, index) {
     return data.get(index);
   }
 
   _getItemCount(data) {
-    const count = data.reduce((acc, value, index) => {
-      return acc + value.get('data').size;
-    }, 0)
-    return count + data.size;
+    return data.size;
   }
 
   _keyExtractor(item, index) {
-    return item.get('key');
+    return 1;
   }
 
   _renderItem({ item, index }) {
-    console.log(item, index);
+    if(this.sectionIndices.includes(index)) return this._renderSectionHeader({ item, index });
     return (
       <View style={styles.item}>
+        <Text>{item}</Text>
+      </View>
+    );
+  }
+
+  _renderSectionHeader({ item, index }) {
+    return (
+      <View style={styles.sectionHeader}>
         <Text>{item.get('key')}</Text>
       </View>
     );
@@ -32,10 +49,10 @@ export default class VirtualizedListExample extends Component {
   render() {
     return (
       <VirtualizedList
-        data={immutableSectionsData}
+        data={this.flatItems}
         getItem={this._getItem}
-        getItemCount={this._getItemCount}
-        renderItem={this._renderItem}
+        getItemCount={this._getItemCount.bind(this)}
+        renderItem={this._renderItem.bind(this)}
       />
     );
   }
