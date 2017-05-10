@@ -26,7 +26,7 @@ export default class VirtualizedListExample extends Component {
   }
 
   _keyExtractor(item, index) {
-    return 1;
+    return index;
   }
 
   _renderItem({ item, index }) {
@@ -50,8 +50,9 @@ export default class VirtualizedListExample extends Component {
     return (
       <VirtualizedList
         data={this.flatItems}
+        keyExtractor={this._keyExtractor}
         getItem={this._getItem}
-        getItemCount={this._getItemCount.bind(this)}
+        getItemCount={this._getItemCount}
         renderItem={this._renderItem.bind(this)}
       />
     );

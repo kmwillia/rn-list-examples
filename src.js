@@ -4,12 +4,13 @@ import styles from './styles';
 import FlatListExample from './FlatListExample';
 import SectionListExample from  './SectionListExample';
 import VirtualizedListExample from './VirtualizedListExample';
+import TypedList from './TypedList';
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      list: 'virtual',
+      list: 'type',
     };
   }
 
@@ -30,10 +31,12 @@ export default class App extends Component {
           <Picker.Item label={'FlatList'} value={'flat'} />
           <Picker.Item label={'SectionList'} value={'section'} />
           <Picker.Item label={'VirtualizedList'} value={'virtual'} />
+          <Picker.Item label={'Typed VirtualizedList'} value={'type'} />
         </Picker>
         {this.state.list === 'flat' ? <FlatListExample /> : null}
         {this.state.list === 'section' ? <SectionListExample /> : null}
         {this.state.list === 'virtual' ? <VirtualizedListExample /> : null}
+        {this.state.list === 'type' ? <TypedList /> : null}
       </View>
     );
   }
