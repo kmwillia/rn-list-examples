@@ -17,5 +17,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     padding: 16,
     backgroundColor: '#dbdbdb',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#757575',
   },
 });

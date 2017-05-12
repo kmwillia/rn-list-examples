@@ -13,7 +13,7 @@ export default class TypedListWrapper extends Component {
         listData={{sectionData, aggregateRowData, sectionIdentifier}}
         renderRow={(rowData) => {
           return (
-            <View style={styles.row}>
+            <View style={styles.item}>
               <Text>{rowData.get('name')}</Text>
             </View>
           );
@@ -46,6 +46,7 @@ class TypedList extends Component {
         });
       });
     });
+    return flatList;
   }
 
   _keyExtractor(item, index) {
@@ -53,18 +54,18 @@ class TypedList extends Component {
   }
 
   _getItem(data, index) {
-    return data.get(index);
+    return data[index];
   }
 
   _getItemCount(data) {
-    return data.size;
+    return data.length;
   }
 
   _renderItem({ item, index }) {
     if(item.type === 'row') {
-      return this.renderRow(item.data);
+      return this.props.renderRow(item.data);
     }
-    return this.renderSectionHeader(item.data);
+    return this.props.renderSectionHeader(item.data);
   }
 
   render() {

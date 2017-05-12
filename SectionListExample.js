@@ -5,7 +5,7 @@ import styles from './styles';
 
 export default class SectionListExample extends Component {
   _keyExtractor(item, index) {
-    return item;
+    return item + index;
   }
 
   _renderItem({ item, index }) {
@@ -29,6 +29,7 @@ export default class SectionListExample extends Component {
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
         renderSectionHeader={this._renderSectionHeader}
+        stickySectionHeadersEnabled={true}
       />
     );
   }
